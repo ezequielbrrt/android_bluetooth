@@ -20,7 +20,8 @@
                     android:id="@+id/label"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Type here:" />
+                    android:text="..."
+                    android:textSize="25dp"/>
 
                 <EditText
                     android:id="@+id/entry"

@@ -36,6 +36,8 @@ public class MainActivity extends Activity
     int counter;
     volatile boolean stopWorker;
 
+    private String deviceName;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -48,76 +50,80 @@ public class MainActivity extends Activity
         myLabel = (TextView)findViewById(R.id.label);
         myTextbox = (EditText)findViewById(R.id.entry);
 
+        deviceName = "MattsBlueTooth";
+
         //Open Button
-        openButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                try
-                {
+        openButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                try {
                     findBT();
                     openBT();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                catch (IOException ex) { }
             }
         });
 
         //Send Button
-        sendButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                try
-                {
+        sendButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                try {
                     sendData();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                catch (IOException ex) { }
             }
         });
 
         //Close button
-        closeButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                try
-                {
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
                     closeBT();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                catch (IOException ex) { }
             }
         });
     }
 
+    /**
+     * Método que busca el adaptado de bluetooth del telefono
+     */
     void findBT()
     {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(mBluetoothAdapter == null)
-        {
+        if(mBluetoothAdapter == null) {
             myLabel.setText("No bluetooth adapter available");
             return;
         }
 
-        if(!mBluetoothAdapter.isEnabled())
-        {
+        //pide permisos al usuario para usar el bluetooth
+        if(!mBluetoothAdapter.isEnabled()) {
             Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetooth, 0);
         }
 
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-        if(pairedDevices.size() > 0)
-        {
-            for(BluetoothDevice device : pairedDevices)
-            {
-                if(device.getName().equals("MattsBlueTooth"))
-                {
+
+        //busca un dispositivo por nombre
+        if(pairedDevices.size() > 0) {
+            for(BluetoothDevice device : pairedDevices) {
+                if(device.getName().equals(deviceName)) {
+                    myLabel.setText("Bluetooth Device Found");
                     mmDevice = device;
                     break;
                 }
             }
         }
-        myLabel.setText("Bluetooth Device Found");
+
+        myLabel.setText("Bluetooth Device Not Found");
     }
+
+    /**
+     * Método que abre la conexión con el dispositivo y el teléfono
+     * @throws IOException
+     */
 
     void openBT() throws IOException
     {
