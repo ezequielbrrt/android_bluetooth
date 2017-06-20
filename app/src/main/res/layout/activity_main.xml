@@ -7,43 +7,60 @@
         tools:ignore="TextFields,HardcodedText" >
 
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true">
 
-        <TextView
-            android:id="@+id/label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Type here:" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/entry"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/label"
-            android:background="@android:drawable/editbox_background" />
+                <TextView
+                    android:id="@+id/label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type here:" />
 
-        <Button
-            android:id="@+id/open"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/entry"
-            android:layout_marginLeft="10dip"
-            android:text="Open" />
+                <EditText
+                    android:id="@+id/entry"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label"
+                    android:background="@android:drawable/editbox_background" />
 
-        <Button
-            android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/open"
-            android:layout_toLeftOf="@id/open"
-            android:text="Send" />
+                <Button
+                    android:id="@+id/open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/entry"
+                    android:layout_marginLeft="10dip"
+                    android:text="Abrir conexión" />
 
-        <Button
-            android:id="@+id/close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/send"
-            android:layout_toLeftOf="@id/send"
-            android:text="Close" />
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/open"
+                    android:layout_toLeftOf="@id/open"
+                    android:text="Enviar datos" />
+
+                <Button
+                    android:id="@+id/close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/send"
+                    android:layout_toLeftOf="@id/send"
+                    android:text="Cerrar" />
+            </RelativeLayout>
+
+
+        </ScrollView>
+
+
+
+
+
 
 </RelativeLayout>
